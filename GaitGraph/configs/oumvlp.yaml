@@ -15,6 +15,7 @@ trainer:
         filename: "gaitgraph-oumvlp-{epoch:02d}-{val_loss_epoch:.2f}"
     - class_path: pytorch_lightning.callbacks.StochasticWeightAveraging
       init_args:
+        swa_lrs: 0.05 
         device: cuda
 model:
   backend_name: resgcn-n51-r4
@@ -23,8 +24,8 @@ model:
   embedding_layer_size: 128
 data:
   data_path: "../data"
-  dataset_path: "../../datasets/OUMVLP-Pose"
-  keypoints: openpose
+  dataset_path: "~/datasets/Gait/OUMVLP-Pose"
+  keypoints: alphapose
   batch_size: 768
   num_workers: 8
   sequence_length: 30
