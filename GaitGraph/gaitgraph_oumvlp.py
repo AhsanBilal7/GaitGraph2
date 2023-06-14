@@ -250,7 +250,7 @@ def cli_main():
     LightningCLI(
         GaitGraphOUMVLP,
         OUMVLPPoseModule,
-        seed_everything_default=5318008,
+        seed_everything_default=36,
         run=True
     )
 
