@@ -1,7 +1,7 @@
 import pandas as pd
 import pytorch_lightning as pl
 import torch
-from pytorch_lightning.utilities.cli import LightningCLI
+from pytorch_lightning.cli import LightningCLI
 from pytorch_metric_learning import losses, distances
 from torch.utils.data import DataLoader
 from torch_geometric.data import Data
@@ -251,7 +251,6 @@ def cli_main():
         GaitGraphOUMVLP,
         OUMVLPPoseModule,
         seed_everything_default=5318008,
-        save_config_overwrite=True,
         run=True
     )
 
