@@ -11,7 +11,19 @@ __GaitGraph: Graph Convolutional Network for Skeleton-Based Gait Recognition__ (
 [![arxiv](https://img.shields.io/badge/arXiv-2101.11228-red)](https://arxiv.org/abs/2101.11228)
 
 ## Preparation
-Clone the repository and install the dependencies from `requirements.txt`.
+```
+git clone https://github.com/tteepe/GaitGraph2.git
+conda create -n gait python=3.8
+conda install pytorch==1.11.0 torchvision==0.12.0 cudatoolkit=11.3 -c pytorch -y
+pip install pytorch-lightning==1.7
+pip install pytorch-metric-learning pandas
+pip install -U 'jsonargparse[signatures]'
+
+conda install pyg -c pyg # no module named torch-sparse
+
+pip install -e .
+```
+
 
 ### Datasets
 - CASIA-B: Download from [here](https://github.com/tteepe/GaitGraph/releases/tag/v0.1) and move `casia-b_pose_coco.csv` to `data`
@@ -25,6 +37,7 @@ We use [PyTorch Lightning CLI](https://pytorch-lightning.readthedocs.io/en/stabl
 
 Train:
 ```bash
+cd GaitGraph
 # CASIA-B
 python3 gaitgraph_casia_b.py fit --config configs/casia_b.yaml 
 # OUMVLP-Pose (OpenPose)
@@ -36,6 +49,9 @@ python3 gaitgraph_oumvlp.py fit --config configs/oumvlp.yaml --data.keypoints al
 Test:
 ```bash
 python3 gaitgraph_{casia_b,oumvlp}.py predict --config <path_to_config_file> --ckpt_path <path_to_checkpoint> --model.tta True
+
+# example
+python gaitgraph_oumvlp.py predict --config lightning_logs/version_0/config.yaml --ckpt_path lightning_logs/version_0/checkpoints/gaitgraph-oumvlp-epoch\=599-val_loss_epoch\=0.80.ckpt --model.tta True
 ```
 
 Logs and checkpoints will be saved to `lighting_logs` and can be shown in tensorboard with:
