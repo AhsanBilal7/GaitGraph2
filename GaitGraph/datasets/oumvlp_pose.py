@@ -35,7 +35,7 @@ class OUMVLPPose(InMemoryDataset):
 
     def process(self):
         # Load ids
-        ids = pd.read_csv(osp.join(self.dataset_path, self.split_id_file), dtype="Int32")
+        ids = pd.read_csv(osp.join(self.dataset_path, self.split_id_file), skiprows=5, dtype="Int32")
         id_ix = 0 if self.split == "train" else 1
         id_list = set(ids.iloc[:, id_ix].to_list())
 
