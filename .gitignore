@@ -49,3 +49,7 @@ venv.bak/
 
 # Project Specific
 data/*.csv
+data/
+
+# Vscode
+.vscode
