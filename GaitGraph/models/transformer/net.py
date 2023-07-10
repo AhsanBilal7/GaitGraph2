@@ -6,15 +6,17 @@ class TransformerClassifier(nn.Module):
 
         encoder_layer = nn.TransformerEncoderLayer(d_model, nhead)
         self.transformer = nn.TransformerEncoder(encoder_layer, num_layers)
-        self.linear = nn.Linear(d_model, num_classes)
+        self.linear = nn.Linear(d_model*30, num_classes)
 
     def forward(self, x):
         # Batch size, Sequence length, Num joints, 3=(x,y,c)
         N, S, J, C  = x.shape
-        x = x.view(N, S, -1).permute(1, 0, 2)
+        x = x[:,:,:,:2] # only x, y coordinates
+        x = x.reshape(N, S, -1).permute(1, 0, 2)
             
         x = self.transformer(x)
         feat = x
-        x = self.linear(x[-1, :, :])
+        x = x.permute(1, 0, 2).reshape(N, -1)
+        x = self.linear(x)
 
         return x, feat
