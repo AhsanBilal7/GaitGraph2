@@ -1,6 +1,17 @@
 import torch.nn as nn
 
 class TransformerClassifier(nn.Module):
+    """Basic Transformer Classifier
+
+    Args:
+        d_model (int): number of expected features in the input
+        nhead (int): number of heads in the multiheadattention models
+        num_classes (int): number of classes
+
+    Returns:
+        x: result output
+        feat: intermediate feature
+    """
     def __init__(self, d_model, nhead, num_classes, num_layers=2):
         super(TransformerClassifier, self).__init__()
 
@@ -20,3 +31,4 @@ class TransformerClassifier(nn.Module):
         x = self.linear(x)
 
         return x, feat
+    
