@@ -14,7 +14,7 @@ __GaitGraph: Graph Convolutional Network for Skeleton-Based Gait Recognition__ (
 ```
 git clone https://github.com/tteepe/GaitGraph2.git
 conda create -n gait python=3.8
-conda install pytorch==1.11.0 torchvision==0.12.0 cudatoolkit=11.3 -c pytorch -y
+conda install pytorch==1.11.0 torchmetrics==0.11.4 torchvision==0.12.0 cudatoolkit=11.3 -c pytorch -y
 pip install pytorch-lightning==1.7
 pip install pytorch-metric-learning pandas
 pip install -U 'jsonargparse[signatures]'
